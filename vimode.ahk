@@ -109,9 +109,10 @@ searchword=
 ;}}}
 
 ; セミコロンエンター
-; {Blind} を付けることで Shift, Ctrl の修飾キーもそのまま通す。
-; Teams や Discord での Shift+Enter 改行も、Teams や Slack の Ctrl+Enter 送信も対応可能。
-`;::Send, {Blind}{Enter}
+; Teams や Discord での Shift+Enter 改行も、Teams や Slack の Ctrl+Enter 送信にも対応させる。
+`;::Send, {Enter}
++`;::Send, +{Enter}
+^`;::Send, ^{Enter}
 
 ; Ctrl+; が打ちづらいので、無変換を修飾キーとして通常のセミコロンを送る。
 ; Blind なので Shift, Ctrl 同時押しも可能。普通に + も入力できる。

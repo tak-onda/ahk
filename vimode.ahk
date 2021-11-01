@@ -2874,6 +2874,7 @@ insert_start:
 ;####################################################################
 ;{{{
 mode_end:
+  IME_SET(0)
   vimode=1
   visualmode=0
   yankmode=0

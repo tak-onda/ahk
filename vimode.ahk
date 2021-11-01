@@ -118,6 +118,11 @@ searchword=
 ; Blind なので Shift, Ctrl 同時押しも可能。普通に + も入力できる。
 sc07b & `;::Send, {Blind}`;
 
+; ctrl-[, ctrl-h, ctrl-j は指が慣れすぎてて、もう戻すことができない。
+^h::Send, {Backspace}
+^j::Send, {Enter}
+^[::Send, {Esc}
+
 ; Ctrl+h でバックスペースは慣れているので問題なし
 sc07b & h::Send, {Blind}{BackSpace}
 ; Ctrl+[ のエスケープは標準マッピングだが遠い。
@@ -300,7 +305,9 @@ $^+k::
 #IfWinNotActive ahk_class Vim
 
 ; 無変換単体で vimode の On/Off
+; モードを切り替えるときは、必ずimeをオフにする。
 sc07b::
+  IME_SET(0)
   if ( vimode=0 or vimode="" )
   {
     vimode=1

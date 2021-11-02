@@ -253,7 +253,6 @@ $^+k::
   j::return             ;なにもしない（Ctrl+Shift+Jで入ってくるので反応してしまう）
   k::Up                 ;プレビュー
   l::Right
-  `;::Enter
   w::
     BlockInput,on
     Send,{Right}        ;右のアプリのプレビュー
@@ -266,6 +265,7 @@ $^+k::
     Send,{Up}
     BlockInput,off
     return
+  `;::
   :::
     Send,{AppsKey}      ;ジャンプリスト表示
     return

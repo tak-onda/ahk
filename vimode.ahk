@@ -2720,7 +2720,8 @@ input_enter:
       return                                    ;Excelの場合はここで終了。
     }
     else                                        ;Excel以外は
-      Send,{down}                               ;カーソルを下へ
+      Send, {Enter} ; 普通の vim でも通常モードで Enter 下には使ってないので素通しに変更
+      ; Send,{down}                               ;カーソルを下へ
 
     BlockInput,off
     return                                      ;通常モードの場合は、ここまでで終了

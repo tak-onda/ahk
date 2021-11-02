@@ -108,31 +108,35 @@ searchmode=
 searchword=
 ;}}}
 
+; いったん見直し。ahk の設定ファイルでは ; はコメントとして重要だし + はよく入力するので無理があった。
+;
 ; セミコロンエンター
 ; Teams や Discord での Shift+Enter 改行も、Teams や Slack の Ctrl+Enter 送信にも対応させる。
-`;::Send, {Enter}
-+`;::Send, +{Enter}
-^`;::Send, ^{Enter}
+;
+; +`;::Send, +{Enter}
+; ^`;::Send, ^{Enter}
 
 ; Ctrl+; が打ちづらいので、無変換を修飾キーとして通常のセミコロンを送る。
 ; Blind なので Shift, Ctrl 同時押しも可能。普通に + も入力できる。
-sc07b & `;::Send, {Blind}`;
+; sc07b & `;::Send, {Blind}`;
 
-; ctrl-[, ctrl-h, ctrl-j は指が慣れすぎてて、もう戻すことができない。
+; ctrl+[, ctrl+h は指が慣れすぎてて、もう戻すことができない。
 ^h::Send, {Backspace}
-^j::Send, {Enter}
+; SKK と衝突するので ctrl+h は使えない
+; ^j::Send, {Enter}
 ^[::Send, {Esc}
 
 ; Ctrl+h でバックスペースは慣れているので問題なし
 sc07b & h::Send, {Blind}{BackSpace}
-; Ctrl+[ のエスケープは標準マッピングだが遠い。
-; ので eScape なので比較的押しやすいホームポジション近くのキーにマッピングしたい
-sc07b & s::
-sc07b & [::
-  Send, {Blind}{ESC}
-  return
+; セミコロンエンターの代わりに無変換＋セミコロンで改行としてみる。
+sc07b & `;::Send, {Enter}
+; k で Shift+Enter, Teams や Discord の改行に対応させる。
+sc07b & k::Send, +{Enter}
+; Teams 複数行モードの送信に便利
+sc07b & m::Send, ^{Enter}
 
-sc07b & m::Send, {AppsKey}
+; ctrl+[ にバインドしているので vimode の on/off に使うことにした
+; sc07b & [ :: Send, {Blind}{ESC}
 sc07b & x::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 
 ;; 設定のリロード
@@ -146,7 +150,7 @@ sc07b & l::
 sc07b & j::
     IME_SET(1)
     ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
-    ; Send, ^j
+    Send, ^j
     return
 
 ;;####################################################################
@@ -180,7 +184,7 @@ $^+j::
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
-sc07b & k::
+sc07b & d::
 $^+k::
   Send,#{Tab}       ;デスクトップ切り替え
   return
@@ -306,26 +310,27 @@ $^+k::
 
 ; 無変換単体で vimode の On/Off
 ; モードを切り替えるときは、必ずimeをオフにする。
-sc07b::
-  IME_SET(0)
-  if ( vimode=0 or vimode="" )
-  {
-    vimode=1
-    gosub,mode_end
-    settimer,draw_tooltip ,%vDraw_tooltip%
-  }
-  else
-  {
-    vimode=0
-    settimer,draw_tooltip,off
-    tooltip,
-    BlockInput,off
-    ;終了時にリロードしておいて、再開時は変更内容が反映された状態に。
-    ;動作が不安定になった場合などにも。
-    ; Reload
-  }
-  return
+; sc07b::
+;   IME_SET(0)
+;   if ( vimode=0 or vimode="" )
+;   {
+;     vimode=1
+;     gosub,mode_end
+;     settimer,draw_tooltip ,%vDraw_tooltip%
+;   }
+;   else
+;   {
+;     vimode=0
+;     settimer,draw_tooltip,off
+;     tooltip,
+;     BlockInput,off
+;     ;終了時にリロードしておいて、再開時は変更内容が反映された状態に。
+;     ;動作が不安定になった場合などにも。
+;     ; Reload
+;   }
+;   return
 
+sc07b & [::
 +^[::
   if ( vimode=0 or vimode="" )
   {
@@ -336,6 +341,7 @@ sc07b::
   return
 #IfWinNotActive
 
+sc07b & ]::
 +^]::
 +^\::                       ;ULE4JIS時に、無効にできないので暫定対処
   vimode=0

@@ -122,7 +122,7 @@ searchword=
 
 ; ctrl+[, ctrl+h は指が慣れすぎてて、もう戻すことができない。
 ^h::Send, {Backspace}
-; SKK と衝突するので ctrl+h は使えない
+; SKK と衝突するので ctrl+j は使えない
 ; ^j::Send, {Enter}
 ^[::Send, {Esc}
 

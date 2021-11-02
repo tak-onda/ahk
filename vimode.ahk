@@ -308,29 +308,29 @@ $^+k::
 ;{{{
 #IfWinNotActive ahk_class Vim
 
-; 無変換単体で vimode の On/Off
+; **変換** 単体で vimode の On/Off
 ; モードを切り替えるときは、必ずimeをオフにする。
-; sc07b::
-;   IME_SET(0)
-;   if ( vimode=0 or vimode="" )
-;   {
-;     vimode=1
-;     gosub,mode_end
-;     settimer,draw_tooltip ,%vDraw_tooltip%
-;   }
-;   else
-;   {
-;     vimode=0
-;     settimer,draw_tooltip,off
-;     tooltip,
-;     BlockInput,off
-;     ;終了時にリロードしておいて、再開時は変更内容が反映された状態に。
-;     ;動作が不安定になった場合などにも。
-;     ; Reload
-;   }
-;   return
+sc079::
+  IME_SET(0)
+  if ( vimode=0 or vimode="" )
+  {
+    vimode=1
+    gosub,mode_end
+    settimer,draw_tooltip ,%vDraw_tooltip%
+  }
+  else
+  {
+    vimode=0
+    settimer,draw_tooltip,off
+    tooltip,
+    BlockInput,off
+    ;終了時にリロードしておいて、再開時は変更内容が反映された状態に。
+    ;動作が不安定になった場合などにも。
+    ; Reload
+  }
+  return
 
-sc07b & [::
+; sc07b & [::
 +^[::
   if ( vimode=0 or vimode="" )
   {
@@ -341,7 +341,7 @@ sc07b & [::
   return
 #IfWinNotActive
 
-sc07b & ]::
+; sc07b & ]::
 +^]::
 +^\::                       ;ULE4JIS時に、無効にできないので暫定対処
   vimode=0

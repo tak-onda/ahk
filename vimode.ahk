@@ -160,8 +160,12 @@ searchword=
 ; Ctrl+[ でエスケープは標準のキーバインドだが、右手の小指で [ を打つのが遠い。
 ; そこでセミコロン Enter の代わりに割り当てた変換キー Enter を無変換とのコンビネーションにして、
 ; エスケープも親指だけで打てるようにしてみた。
-^[::Send, {Esc}
-sc07b & Enter::Send, {Esc}
+; ノーマルモードに抜けるときに自動的に IME を OFF にするようにした。
+^[::
+sc07b & Enter::
+  IME_SET(0)
+  Send, {Esc}
+  return
 
 ; Ctrl+h でバックスペースは慣れているので問題なし
 sc07b & h::Send, {Blind}{BackSpace}

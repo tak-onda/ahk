@@ -108,6 +108,36 @@ searchmode=
 searchword=
 ;}}}
 
+
+; ------------------------------------------------------------------------------
+; https://qiita.com/azuwai2/items/6c4d065aefc18d2c4085
+; Space も修飾キーとみなして簡易的に使えるようにする。
+; ------------------------------------------------------------------------------
+; Space::Send,{Space}
+; +Space::+Space
+; ^Space::^Space
+;
+; Space & h::Send,{Left}
+; Space & j::Send,{Down}
+; Space & k::Send,{Up}
+; Space & l::Send,{Right}
+;
+; ;PageDn / PageUp
+; Space & f::Send,{Blind}{PgDn}
+;
+; space & b::Send,{Blind}{PgUp}
+;
+; ;Home / End
+; Space & 0::Send,{Blind}{Home}
+; Space & 4::Send,{Blind}{End}
+;
+; Space & i::Send,{Tab}
+;
+; ; 検索 Ctrl+f
+; Space & /::Send,^f
+; ; 置換 Ctrl+h
+; Space & r::Send,^h
+
 ; いったん見直し。ahk の設定ファイルでは ; はコメントとして重要だし + はよく入力するので無理があった。
 ;
 ; セミコロンエンター
@@ -120,24 +150,24 @@ searchword=
 ; Blind なので Shift, Ctrl 同時押しも可能。普通に + も入力できる。
 ; sc07b & `;::Send, {Blind}`;
 
-; ctrl+[, ctrl+h は指が慣れすぎてて、もう戻すことができない。
-^h::Send, {Backspace}
+; VSCode が置換に割り当てているので、無変換キーのバインディングに体を慣らす。
+; ^h::Send, {Backspace}
+; ^+h::Send, ^+h
+
 ; SKK と衝突するので ctrl+j は使えない
 ; ^j::Send, {Enter}
+
+; Ctrl+[ でエスケープは標準のキーバインドだが、右手の小指で [ を打つのが遠い。
+; そこでセミコロン Enter の代わりに割り当てた変換キー Enter を無変換とのコンビネーションにして、
+; エスケープも親指だけで打てるようにしてみた。
 ^[::Send, {Esc}
+sc07b & Enter::Send, {Esc}
 
 ; Ctrl+h でバックスペースは慣れているので問題なし
 sc07b & h::Send, {Blind}{BackSpace}
-; セミコロンエンターの代わりに無変換＋セミコロンで改行としてみる。
-sc07b & `;::Send, {Enter}
-; k で Shift+Enter, Teams や Discord の改行に対応させる。
-sc07b & k::Send, +{Enter}
-; Teams 複数行モードの送信に便利
-sc07b & m::Send, ^{Enter}
 
-; ctrl+[ にバインドしているので vimode の on/off に使うことにした
-; sc07b & [ :: Send, {Blind}{ESC}
-sc07b & x::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
+; expand という意味で割当しなおし。
+sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 
 ;; 設定のリロード
 sc07b & r::Reload
@@ -150,6 +180,8 @@ sc07b & l::
 sc07b & j::
     IME_SET(1)
     ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
+    ; とりあえず CurbusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
+    ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
     Send, ^j
     return
 
@@ -158,20 +190,23 @@ sc07b & j::
 ;;####################################################################
 ;{{{
 
+sc07b & [::
 $^+h::
   Send,^#{Left}     ;デスクトップ左
-  sleep,50
-  WinGet,hoge,ID,A
-  IfEqual hoge
-    Send,!{ESC}
+;   sleep,50
+;   WinGet,hoge,ID,A
+;   IfEqual hoge
+;     Send,!{ESC}
   return
+
+sc07b & ]::
 $^+l::
   Send,^#{Right}        ;デスクトップ右
-  sleep,50
-  WinGet,hoge,ID,A
-  IfEqual hoge
-    Send,!{ESC}
-  return
+;   sleep,50
+;   WinGet,hoge,ID,A
+;   IfEqual hoge
+;     Send,!{ESC}
+ return
   ;アニメーション停止手順
   ;コントロールパネル、システムとセキュリティ、システム、システムの詳細設定
   ;「システムのプロパティ」ダイアログの「詳細設定」タブ、パフォーマンスパネルの「設定」ボタン
@@ -184,7 +219,7 @@ $^+j::
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
-sc07b & d::
+sc07b & k::
 $^+k::
   Send,#{Tab}       ;デスクトップ切り替え
   return

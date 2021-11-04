@@ -112,15 +112,16 @@ searchword=
 ; ------------------------------------------------------------------------------
 ; https://qiita.com/azuwai2/items/6c4d065aefc18d2c4085
 ; Space も修飾キーとみなして簡易的に使えるようにする。
+; → 応答速度が悪くなるので停止。モード変換なしで hjkl したいが...
 ; ------------------------------------------------------------------------------
-Space::Send,{Space}
-+Space::+Space
-^Space::^Space
+;Space::Send,{Space}
+;+Space::+Space
+;^Space::^Space
 ;
-Space & h::Send,{Left}
-Space & j::Send,{Down}
-Space & k::Send,{Up}
-Space & l::Send,{Right}
+;Space & h::Send,{Left}
+;Space & j::Send,{Down}
+;Space & k::Send,{Up}
+;Space & l::Send,{Right}
 ;
 ; ;PageDn / PageUp
 ; Space & f::Send,{Blind}{PgDn}
@@ -167,8 +168,13 @@ sc07b & Enter::
   Send, {Esc}
   return
 
-; Ctrl+h でバックスペースは慣れているので問題なし
-sc07b & h::Send, {Blind}{BackSpace}
+sc07b & h::Send, {Left}
+sc07b & j::Send, {Down}
+sc07b & k::Send, {Up}
+sc07b & l::Send, {Right}
+
+; Ctrl+h に近いので n をバックスペースに
+sc07b & n::Send, {Blind}{BackSpace}
 
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab
@@ -181,10 +187,10 @@ sc07b & r::Reload
 
 
 ;; 無変換 + N, J で input モードに
-sc07b & l::
+sc07b & ,::
     IME_SET(0)
     return
-sc07b & j::
+sc07b & .::
     IME_SET(1)
     ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
     ; とりあえず CurbusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
@@ -226,7 +232,7 @@ $^+j::
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
-sc07b & k::
+sc07b & d::
 $^+k::
   Send,#{Tab}       ;デスクトップ切り替え
   return

@@ -170,6 +170,9 @@ sc07b & Enter::
 ; Ctrl+h でバックスペースは慣れているので問題なし
 sc07b & h::Send, {Blind}{BackSpace}
 
+; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
+sc07b & Tab::AltTab
+
 ; expand という意味で割当しなおし。
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 

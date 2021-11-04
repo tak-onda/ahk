@@ -113,14 +113,14 @@ searchword=
 ; https://qiita.com/azuwai2/items/6c4d065aefc18d2c4085
 ; Space も修飾キーとみなして簡易的に使えるようにする。
 ; ------------------------------------------------------------------------------
-; Space::Send,{Space}
-; +Space::+Space
-; ^Space::^Space
+Space::Send,{Space}
++Space::+Space
+^Space::^Space
 ;
-; Space & h::Send,{Left}
-; Space & j::Send,{Down}
-; Space & k::Send,{Up}
-; Space & l::Send,{Right}
+Space & h::Send,{Left}
+Space & j::Send,{Down}
+Space & k::Send,{Up}
+Space & l::Send,{Right}
 ;
 ; ;PageDn / PageUp
 ; Space & f::Send,{Blind}{PgDn}

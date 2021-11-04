@@ -151,16 +151,10 @@ searchword=
 ; Blind なので Shift, Ctrl 同時押しも可能。普通に + も入力できる。
 ; sc07b & `;::Send, {Blind}`;
 
-; VSCode が置換に割り当てているので、無変換キーのバインディングに体を慣らす。
-; ^h::Send, {Backspace}
-; ^+h::Send, ^+h
-
 ; SKK と衝突するので ctrl+j は使えない
 ; ^j::Send, {Enter}
 
-; Ctrl+[ でエスケープは標準のキーバインドだが、右手の小指で [ を打つのが遠い。
-; そこでセミコロン Enter の代わりに割り当てた変換キー Enter を無変換とのコンビネーションにして、
-; エスケープも親指だけで打てるようにしてみた。
+; エスケープも親指だけ、無変換+Enter で打てるようにしてみた。
 ; ノーマルモードに抜けるときに自動的に IME を OFF にするようにした。
 ^[::
 sc07b & Enter::
@@ -168,13 +162,27 @@ sc07b & Enter::
   Send, {Esc}
   return
 
+; 変換エンターにしたので、無変換+Enter(変換)で Backspace にしてみた。
+; Space とバックスペースは相性がいい気がする。
+sc07b & Space::Send, {Blind}{BackSpace}
+
+; h, j, k, l で移動させたかったので IME on/off のキーバインディングを変更
 sc07b & h::Send, {Left}
 sc07b & j::Send, {Down}
 sc07b & k::Send, {Up}
 sc07b & l::Send, {Right}
 
-; Ctrl+h に近いので n をバックスペースに
-sc07b & n::Send, {Blind}{BackSpace}
+; 無変換 + i / o で IME の on/off
+sc07b & o:: ; nOrmal
+    IME_SET(0)
+    return
+sc07b & i:: ; Input
+    IME_SET(1)
+    ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
+    ; とりあえず CurbusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
+    ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
+    Send, ^j
+    return
 
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab
@@ -186,25 +194,13 @@ sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 sc07b & r::Reload
 
 
-;; 無変換 + N, J で input モードに
-sc07b & ,::
-    IME_SET(0)
-    return
-sc07b & .::
-    IME_SET(1)
-    ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
-    ; とりあえず CurbusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
-    ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
-    Send, ^j
-    return
-
 ;;####################################################################
 ;;タスク制御等　(起動したら通常モードでも有効。除外無し)
 ;;####################################################################
 ;{{{
 
 sc07b & [::
-$^+h::
+; $^+h::
   Send,^#{Left}     ;デスクトップ左
 ;   sleep,50
 ;   WinGet,hoge,ID,A
@@ -213,7 +209,7 @@ $^+h::
   return
 
 sc07b & ]::
-$^+l::
+; $^+l::
   Send,^#{Right}        ;デスクトップ右
 ;   sleep,50
 ;   WinGet,hoge,ID,A

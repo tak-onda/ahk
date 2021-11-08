@@ -171,6 +171,8 @@ sc07b & h::Send, {Left}
 sc07b & j::Send, {Down}
 sc07b & k::Send, {Up}
 sc07b & l::Send, {Right}
+sc07b & 0::Send, {Home}
+sc07b & 4::Send, {End}
 
 ; 無変換 + i / o で IME の on/off
 sc07b & o:: ; nOrmal

@@ -191,6 +191,10 @@ sc07b & Tab::AltTab
 
 ; 無変換 + z で Win+z (スナップツール) 起動割り当て
 sc07b & z::#z
+sc07b & a::#a
+sc07b & n::#n
+sc07b & x::#x
+sc07b & s::#s
 
 ; expand という意味で割当しなおし。
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。

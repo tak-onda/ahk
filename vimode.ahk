@@ -189,6 +189,9 @@ sc07b & i:: ; Input
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab
 
+; 無変換 + z で Win+z (スナップツール) 起動割り当て
+sc07b & z::#z
+
 ; expand という意味で割当しなおし。
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 

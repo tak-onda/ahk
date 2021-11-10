@@ -195,6 +195,8 @@ sc07b & a::#a
 sc07b & n::#n
 sc07b & x::#x
 sc07b & s::#s
+sc07b & v::#v
+sc07b & .::#h ; 音声入力, 右手の押しやす目のキーで . に
 
 ; expand という意味で割当しなおし。
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。

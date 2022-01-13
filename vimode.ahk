@@ -150,21 +150,22 @@ searchword=
 ; Ctrl+; が打ちづらいので、無変換を修飾キーとして通常のセミコロンを送る。
 ; Blind なので Shift, Ctrl 同時押しも可能。普通に + も入力できる。
 ; sc07b & `;::Send, {Blind}`;
-
 ; SKK と衝突するので ctrl+j は使えない
 ; ^j::Send, {Enter}
 
 ; エスケープも親指だけ、無変換+Enter で打てるようにしてみた。
 ; ノーマルモードに抜けるときに自動的に IME を OFF にするようにした。
 ^[::
-sc07b & Enter::
+; sc07b & Enter::
   IME_SET(0)
   Send, {Esc}
   return
 
+;; 2022-01-13 mac と操作感を合わせるため変換 Enter はいったん停止
+; 変換で IME On/Off になるように。
 ; 変換エンターにしたので、無変換+Enter(変換)で Backspace にしてみた。
 ; Space とバックスペースは相性がいい気がする。
-sc07b & Space::Send, {Blind}{BackSpace}
+; sc07b & Space::Send, {Blind}{BackSpace}
 
 ; h, j, k, l で移動させたかったので IME on/off のキーバインディングを変更
 sc07b & h::Send, {Left}

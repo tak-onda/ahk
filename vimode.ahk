@@ -175,11 +175,13 @@ sc07b & l::Send, {Right}
 sc07b & 0::Send, {Home}
 sc07b & 4::Send, {End}
 
-; 無変換 + i / o で IME の on/off
-sc07b & o:: ; nOrmal
+;; macos と同じ振舞いになるように「無変換」=「英数」単体でオフになるように
+sc07b:: ; nOrmal
     IME_SET(0)
     return
-sc07b & i:: ; Input
+
+;; macos と同じ振舞いになるように「かな」単体でオンになるように
+sc070:: ; Input
     IME_SET(1)
     ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
     ; とりあえず CurbusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、

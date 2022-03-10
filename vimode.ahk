@@ -121,9 +121,9 @@ sc07b::
 sc070:: ; Input
     IME_SET(1)
     ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
-    ; とりあえず CurbusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
+    ; とりあえず CorvusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
     ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
-    Send, ^j
+    ; Send, ^j
     return
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする

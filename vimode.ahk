@@ -129,6 +129,11 @@ sc070:: ; Input
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする
 F3::#Tab
 
+;; Enter と Backspace だけは押しやすく
+^m::Send,{Enter}
+^h::Send,{Backspace}
+
+
 ; ------------------------------------------------------------------------------
 ; https://qiita.com/azuwai2/items/6c4d065aefc18d2c4085
 ; Space も修飾キーとみなして簡易的に使えるようにする。
@@ -186,6 +191,13 @@ F3::#Tab
 ; 変換エンターにしたので、無変換+Enter(変換)で Backspace にしてみた。
 ; Space とバックスペースは相性がいい気がする。
 ; sc07b & Space::Send, {Blind}{BackSpace}
+
+;; Windows キーも独自の機能を持っているのでやりづらい
+;; # と無変換をどう使うか
+; sc07b & c::Send,^c
+; sc07b & o::Send,^l ;; 画面ロック
+; sc07b & x::Send,^x ;; 管理者メニュー
+
 
 ; h, j, k, l で移動させたかったので IME on/off のキーバインディングを変更
 sc07b & h::Send, {Left}

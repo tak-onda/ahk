@@ -117,6 +117,9 @@ searchword=
 #l::Send, ^l
 #c::Send, ^c
 #x::Send, ^x
+#t::Send, ^t    ;; Cmd+Tab = Ctrl+Tab
+#^t::Send, ^+t  ;; Cmd+Shift+Tab = Ctrl+Shift+Tab
+#w::Send, ^w    ;; Cmd+w
 
 ;; 「無変換」=「英数」単体でオフになるように
 sc07b::

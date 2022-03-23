@@ -127,6 +127,7 @@ sc07b::
     return
 
 ;; 「かな」単体でオンになるように
+RAlt::
 AppsKey::
   if (IME_GET()=1) {
     IME_SET(0)

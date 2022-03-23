@@ -127,6 +127,15 @@ sc07b::
     return
 
 ;; 「かな」単体でオンになるように
+AppsKey::
+  if (IME_GET()=1) {
+    IME_SET(0)
+  } else {                      ;日本語入力(edgeのテキストボックス上だと判定できない)
+    IME_SET(1)
+    Send, ^j
+  }
+  return
+
 sc070:: ; Input
     IME_SET(1)
     ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。

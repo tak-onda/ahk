@@ -32,6 +32,7 @@ sc07b & r::Reload
 ;; Enter と Backspace だけは押しやすく
 ^m::Send,{Enter}
 ^h::Send,{Backspace}
+^[::Send,{Esc}
 
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab

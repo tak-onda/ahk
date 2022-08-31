@@ -18,12 +18,12 @@ sc070:: ; Input
 return
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする
-F3::#Tab
+F3::^Tab
 
-!c::Send, ^c
-!x::Send, ^x
-!v::Send, ^v
-!l::Send, ^l
+;; !c::Send, ^c
+;;!x::Send, ^x
+;;!v::Send, ^v
+;;!l::Send, ^l
 
 ;; VSCode や Windows Terminal, JetBrains でないときは emacs モード使いたい
 ;; ^h::Send, {BackSpace}

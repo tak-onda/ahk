@@ -4,21 +4,26 @@
 
 ;; 「無変換」=「英数」単体でオフになるように
 sc07b::
-    IME_SET(0)
-    return
+  IME_SET(0)
+return
 
 ;; 「変換」「かな」単体でオンになるように
 sc079::
 sc070:: ; Input
-    IME_SET(1)
-    ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
-    ; とりあえず CorvusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
-    ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
-    Send, ^j
-    return
+  IME_SET(1)
+  ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
+  ; とりあえず CorvusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
+  ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
+  Send, ^j
+return
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする
 F3::#Tab
+
+!c::Send, ^c
+!x::Send, ^x
+!v::Send, ^v
+!l::Send, ^l
 
 ;; VSCode や Windows Terminal, JetBrains でないときは emacs モード使いたい
 ;; ^h::Send, {BackSpace}
@@ -61,16 +66,16 @@ sc07b & .::#h ; 音声入力, 右手の押しやす目のキーで . に
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 
 sc07b & t::
-;; $^+j::
-  Send,#t           ;タスクバー
-  return
+  ;; $^+j::
+  Send,#t ;タスクバー
+return
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
 sc07b & d::
-;; $^+k::
-  Send,#{Tab}       ;デスクトップ切り替え
-  return
+  ;; $^+k::
+  Send,#{Tab} ;デスクトップ切り替え
+return
 
 ;
 ; Alt+Tab タスク切り替え中
@@ -90,28 +95,28 @@ sc07b & d::
   k::Up
   l::Right
   `;::Enter
-  w::                                       ;右のデスクトップへ(ジャンプリスト時は何もしない)
-    ifWinActive ,タスク ビュー            ;ahkファイルは、UTF-8のBOM付きにしておかないと、上手く判定されないので注意。
-    {
-      BlockInput,on
-      Send,+{Tab}
-      Send,{Right}
-      Send,{Space}
-      Send,{Tab}
-      BlockInput,off
-    }
-    return
-  b::                                       ;左のデスクトップへ(ジャンプリスト時は何もしない)
-    ifWinActive ,タスク ビュー
-    {
-      BlockInput,on
-      Send,+{Tab}
-      Send,{Left}
-      Send,{Space}
-      Send,{Tab}
-      BlockInput,off
-    }
-    return
+w:: ;右のデスクトップへ(ジャンプリスト時は何もしない)
+  ifWinActive ,タスク ビュー ;ahkファイルは、UTF-8のBOM付きにしておかないと、上手く判定されないので注意。
+  {
+    BlockInput,on
+    Send,+{Tab}
+    Send,{Right}
+    Send,{Space}
+    Send,{Tab}
+    BlockInput,off
+  }
+return
+b:: ;左のデスクトップへ(ジャンプリスト時は何もしない)
+  ifWinActive ,タスク ビュー
+  {
+    BlockInput,on
+    Send,+{Tab}
+    Send,{Left}
+    Send,{Space}
+    Send,{Tab}
+    BlockInput,off
+  }
+return
 
 #IfWinActive
 
@@ -121,64 +126,64 @@ sc07b & d::
   j::Down
   k::Up
   `;::Enter
-  ESC::
-  ^h::
-    BlockInput,on
-    Send,{Esc}
-    Send,#{t}
-    BlockInput,off
-    return
+ESC::
+^h::
+  BlockInput,on
+  Send,{Esc}
+  Send,#{t}
+  BlockInput,off
+return
 #IfWinActive
 ;
 ;Win+T タスクバー
 #IfWinActive ahk_class Shell_TrayWnd
   h::Left
-  j::return             ;なにもしない（Ctrl+Shift+Jで入ってくるので反応してしまう）
-  k::Up                 ;プレビュー
-  l::Right
-  w::
-    BlockInput,on
-    Send,{Right}        ;右のアプリのプレビュー
-    Send,{Up}
-    BlockInput,off
-    return
-  b::                       ;左のアプリのプレビュー
-    BlockInput,on
-    Send,{Left}
-    Send,{Up}
-    BlockInput,off
-    return
-  `;::
-  :::
-    Send,{AppsKey}      ;ジャンプリスト表示
-    return
+j::return ;なにもしない（Ctrl+Shift+Jで入ってくるので反応してしまう）
+k::Up ;プレビュー
+l::Right
+w::
+  BlockInput,on
+  Send,{Right} ;右のアプリのプレビュー
+  Send,{Up}
+  BlockInput,off
+return
+b:: ;左のアプリのプレビュー
+  BlockInput,on
+  Send,{Left}
+  Send,{Up}
+  BlockInput,off
+return
+`;::
+:::
+  Send,{AppsKey} ;ジャンプリスト表示
+return
 #IfWinActive
 ;
 ;Win+T タスクバーのプレビュー
 #IfWinActive ahk_class TaskListThumbnailWnd
   h::Left
   l::Right
-  j::Down                   ;タスクバーへ戻る
-  w::
-    BlockInput,on
-    Send,{Down}         ;右のアプリのプレビュー
-    Send,{Right}
-    Send,{Up}
-    BlockInput,off
-    return
-  b::                       ;左のアプリのプレビュー
-    BlockInput,on
-    Send,{Down}
-    Send,{Left}
-    Send,{Up}
-    BlockInput,off
-    return
-  Enter:: Send,{Enter}  ;選択
-  x::
-    BlockInput,on
-    Send,{AppsKey}
-    sleep,200           ;右クリックメニューが出るまで時間がかかるのか、cが空振る事がある。
-    Send,c
-    BlockInput,off
-    return
+  j::Down ;タスクバーへ戻る
+w::
+  BlockInput,on
+  Send,{Down} ;右のアプリのプレビュー
+  Send,{Right}
+  Send,{Up}
+  BlockInput,off
+return
+b:: ;左のアプリのプレビュー
+  BlockInput,on
+  Send,{Down}
+  Send,{Left}
+  Send,{Up}
+  BlockInput,off
+return
+Enter:: Send,{Enter} ;選択
+x::
+  BlockInput,on
+  Send,{AppsKey}
+  sleep,200 ;右クリックメニューが出るまで時間がかかるのか、cが空振る事がある。
+  Send,c
+  BlockInput,off
+return
 #IfWinActive

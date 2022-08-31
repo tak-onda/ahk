@@ -20,7 +20,7 @@ return
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする
 F3::^Tab
 
-;; !c::Send, ^c
+;;!c::Send, ^c
 ;;!x::Send, ^x
 ;;!v::Send, ^v
 ;;!l::Send, ^l

@@ -18,7 +18,7 @@ sc070:: ; Input
 return
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする
-F3::^Tab
+F3::#Tab
 
 ;;!c::Send, ^c
 ;;!x::Send, ^x

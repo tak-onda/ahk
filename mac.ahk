@@ -39,6 +39,7 @@ sc07b & r::Reload
 ^m::Send,{Enter}
 ^h::Send,{Backspace}
 ^[::Send,{Esc}
+;; ^n::Send,{Down}
 
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab
@@ -59,16 +60,13 @@ sc07b & n::#n
 sc07b & s::#s
 sc07b & c::^c
 sc07b & x::^x
+sc07b & t::^t
+sc07b & w::^w
 sc07b & v::#v
 sc07b & .::#h ; 音声入力, 右手の押しやす目のキーで . に
 
 ; expand という意味で割当しなおし。
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
-
-sc07b & t::
-  ;; $^+j::
-  Send,#t ;タスクバー
-return
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 

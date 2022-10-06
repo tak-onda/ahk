@@ -44,18 +44,32 @@ sc07b & r::Reload
 
 ;; Windows Terminal で入れ替えると tmux が使えない
 #IfWinActive ahk_exe WindowsTerminal.exe
-  F13 & B::Send,^b
-  F13 & N::Send,^n
-  F13 & P::Send,^p
-  F13 & F::Send,^f
-  F13 & H::Send,^h
-  F13 & D::Send,^d
-  F13 & A::Send,^a
-  F13 & E::Send,^e
-  F13 & K::Send,^k
-  F13 & [::Send,{Blind}{Esc}
-  F13 & J::^j
-  F13 & M::Send,{Blind}{Enter}
+  F13 & a::Send,^a
+  F13 & b::Send,^b
+  F13 & c::Send,^c
+  F13 & d::Send,^d
+  F13 & e::Send,^e
+  F13 & f::Send,^f
+  F13 & g::Send,^g
+  F13 & h::Send,^h
+  F13 & i::Send,^i
+  F13 & j::Send,^j
+  F13 & k::Send,^k
+  F13 & l::Send,^l
+  F13 & m::Send,^m
+  F13 & n::Send,^n
+  F13 & o::Send,^o
+  F13 & p::Send,^p
+  F13 & q::Send,^q
+  F13 & r::Send,^r
+  F13 & s::Send,^s
+  F13 & t::Send,^t
+  F13 & u::Send,^u
+  F13 & v::Send,^v
+  F13 & w::Send,^w
+  F13 & x::Send,^x
+  F13 & y::Send,^y
+  F13 & z::Send,^z
 #IfWinActive
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする

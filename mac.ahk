@@ -76,7 +76,7 @@ sc07b & r::Reload
 F3::#Tab
 F13 & Up::#Tab
 F13 & Down::#Tab
-^Tab::Send,!{Tab}
+^Tab::!Tab
 
 ;; macOS では Raycast のクリップボード履歴を使っている
 !v::Send,#v

@@ -42,6 +42,7 @@ sc07b & r::Reload
   ;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
 #IfWinNotActive
 
+;; Windows Terminal で入れ替えると tmux が使えない
 #IfWinActive ahk_exe WindowsTerminal.exe
   F13 & B::Send,^b
   F13 & N::Send,^n

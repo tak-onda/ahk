@@ -17,29 +17,33 @@ sc070:: ; Input
   Send, ^j
 return
 
-;; F3 でミッションコントロールみたいに Win-Tab 表示にする
-F3::#Tab
-
-;;!c::Send, ^c
-;;!x::Send, ^x
-;;!v::Send, ^v
-;;!l::Send, ^l
-
-;; VSCode や Windows Terminal, JetBrains でないときは emacs モード使いたい
-;; ^h::Send, {BackSpace}
-;; ^m::Send, {Enter}
-;; ^a::Send, {Home}
-;; ^a::Send, {Home}
-;; ^f::Send, {Right}
-
 ;; 設定のリロード
 sc07b & r::Reload
 
-;; Enter と Backspace だけは押しやすく
-^m::Send,{Enter}
-^h::Send,{Backspace}
-^[::Send,{Esc}
-;; ^n::Send,{Down}
+;; https://hattomo.github.io/posts/main/21/q1/0223-autohotkey-mac/
+;; ChangeKey で mac の Cmd の位置に Ctrl, CapsLock を F13 にした上での設定
+;; http://did2.blog64.fc2.com/blog-entry-349.html
+
+;; CapsLock を使って Emacs 的なキーバインドを実現する
+F13 & B::Send,{Blind}{Left}
+F13 & N::Send,{Blind}{Down}
+F13 & P::Send,{Blind}{Up}
+F13 & F::Send,{Blind}{Right}
+F13 & H::Send,{Blind}{Backspace}
+F13 & D::Send,{Blind}{Delete}
+F13 & A::Send,{Blind}{Home}
+F13 & E::Send,{Blind}{End}
+F13 & K::Send,+{End}{Shift}+{Delete}
+F13 & [::Send,{Blind}{Esc}
+F13 & J::^j
+F13 & M::Send,{Blind}{Enter}
+;; Ctrl + Enter の意味がわからない
+;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
+
+;; F3 でミッションコントロールみたいに Win-Tab 表示にする
+F3::#Tab
+F13 & Up::#Tab
+F13 & Down::#Tab
 
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab
@@ -64,6 +68,7 @@ sc07b & t::^t
 sc07b & w::^w
 sc07b & v::#v
 sc07b & .::#h ; 音声入力, 右手の押しやす目のキーで . に
+sc07b & Space::#Space
 
 ; expand という意味で割当しなおし。
 sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
@@ -71,8 +76,8 @@ sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
 sc07b & d::
-  ;; $^+k::
-  Send,#{Tab} ;デスクトップ切り替え
+;; $^+k::
+Send,#{Tab} ;デスクトップ切り替え
 return
 
 ;
@@ -93,28 +98,28 @@ return
   k::Up
   l::Right
   `;::Enter
-w:: ;右のデスクトップへ(ジャンプリスト時は何もしない)
-  ifWinActive ,タスク ビュー ;ahkファイルは、UTF-8のBOM付きにしておかないと、上手く判定されないので注意。
-  {
-    BlockInput,on
-    Send,+{Tab}
-    Send,{Right}
-    Send,{Space}
-    Send,{Tab}
-    BlockInput,off
-  }
-return
-b:: ;左のデスクトップへ(ジャンプリスト時は何もしない)
-  ifWinActive ,タスク ビュー
-  {
-    BlockInput,on
-    Send,+{Tab}
-    Send,{Left}
-    Send,{Space}
-    Send,{Tab}
-    BlockInput,off
-  }
-return
+  w:: ;右のデスクトップへ(ジャンプリスト時は何もしない)
+    ifWinActive ,タスク ビュー ;ahkファイルは、UTF-8のBOM付きにしておかないと、上手く判定されないので注意。
+    {
+      BlockInput,on
+      Send,+{Tab}
+      Send,{Right}
+      Send,{Space}
+      Send,{Tab}
+      BlockInput,off
+    }
+  return
+  b:: ;左のデスクトップへ(ジャンプリスト時は何もしない)
+    ifWinActive ,タスク ビュー
+    {
+      BlockInput,on
+      Send,+{Tab}
+      Send,{Left}
+      Send,{Space}
+      Send,{Tab}
+      BlockInput,off
+    }
+  return
 
 #IfWinActive
 
@@ -124,37 +129,37 @@ return
   j::Down
   k::Up
   `;::Enter
-ESC::
-^h::
-  BlockInput,on
-  Send,{Esc}
-  Send,#{t}
-  BlockInput,off
-return
+  ESC::
+  ^h::
+    BlockInput,on
+    Send,{Esc}
+    Send,#{t}
+    BlockInput,off
+  return
 #IfWinActive
 ;
 ;Win+T タスクバー
 #IfWinActive ahk_class Shell_TrayWnd
   h::Left
-j::return ;なにもしない（Ctrl+Shift+Jで入ってくるので反応してしまう）
-k::Up ;プレビュー
-l::Right
-w::
-  BlockInput,on
-  Send,{Right} ;右のアプリのプレビュー
-  Send,{Up}
-  BlockInput,off
-return
-b:: ;左のアプリのプレビュー
-  BlockInput,on
-  Send,{Left}
-  Send,{Up}
-  BlockInput,off
-return
-`;::
-:::
-  Send,{AppsKey} ;ジャンプリスト表示
-return
+  j::return ;なにもしない（Ctrl+Shift+Jで入ってくるので反応してしまう）
+  k::Up ;プレビュー
+  l::Right
+  w::
+    BlockInput,on
+    Send,{Right} ;右のアプリのプレビュー
+    Send,{Up}
+    BlockInput,off
+  return
+  b:: ;左のアプリのプレビュー
+    BlockInput,on
+    Send,{Left}
+    Send,{Up}
+    BlockInput,off
+  return
+  `;::
+  :::
+    Send,{AppsKey} ;ジャンプリスト表示
+  return
 #IfWinActive
 ;
 ;Win+T タスクバーのプレビュー
@@ -162,26 +167,26 @@ return
   h::Left
   l::Right
   j::Down ;タスクバーへ戻る
-w::
-  BlockInput,on
-  Send,{Down} ;右のアプリのプレビュー
-  Send,{Right}
-  Send,{Up}
-  BlockInput,off
-return
-b:: ;左のアプリのプレビュー
-  BlockInput,on
-  Send,{Down}
-  Send,{Left}
-  Send,{Up}
-  BlockInput,off
-return
-Enter:: Send,{Enter} ;選択
-x::
-  BlockInput,on
-  Send,{AppsKey}
-  sleep,200 ;右クリックメニューが出るまで時間がかかるのか、cが空振る事がある。
-  Send,c
-  BlockInput,off
-return
+  w::
+    BlockInput,on
+    Send,{Down} ;右のアプリのプレビュー
+    Send,{Right}
+    Send,{Up}
+    BlockInput,off
+  return
+  b:: ;左のアプリのプレビュー
+    BlockInput,on
+    Send,{Down}
+    Send,{Left}
+    Send,{Up}
+    BlockInput,off
+  return
+  Enter:: Send,{Enter} ;選択
+  x::
+    BlockInput,on
+    Send,{AppsKey}
+    sleep,200 ;右クリックメニューが出るまで時間がかかるのか、cが空振る事がある。
+    Send,c
+    BlockInput,off
+  return
 #IfWinActive

@@ -44,6 +44,10 @@ F13 & M::Send,{Blind}{Enter}
 F3::#Tab
 F13 & Up::#Tab
 F13 & Down::#Tab
+^Tab::Send,!Tab
+
+;; macOS では Raycast のクリップボード履歴を使っている
+!v::Send,#v
 
 ; 無変換+タブで Alt+Tab 置き換え。キーボードだけでフォーカス切り替えするには Win+Tab より都合がいい。
 sc07b & Tab::AltTab

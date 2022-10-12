@@ -36,6 +36,8 @@ sc07b & r::Reload
   F13 & E::Send,{Blind}{End}
   F13 & K::Send,+{End}{Shift}+{Delete}
   F13 & [::Send,{Blind}{Esc}
+  F13 & ]::Send,^] ;; IdeaVim でシンボル移動
+  F13 & T::Send,^t ;; IdeaVim で戻る
   F13 & J::^j
   F13 & M::Send,{Blind}{Enter}
   ;; Ctrl + Enter の意味がわからない

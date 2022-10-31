@@ -78,7 +78,9 @@ sc07b & r::Reload
 F3::#Tab
 F13 & Up::#Tab
 F13 & Down::#Tab
-^Tab::!Tab
+; !Tab だダメ
+; LCtrl & Tab::AltTabMenu
+LCtrl & Tab::AltTab
 
 ;; macOS では Raycast のクリップボード履歴を使っている
 !v::Send,#v
@@ -113,10 +115,10 @@ sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
-sc07b & d::
-;; $^+k::
-Send,#{Tab} ;デスクトップ切り替え
-return
+; sc07b & d::
+; ;; $^+k::
+; Send,#{Tab} ;デスクトップ切り替え
+; return
 
 ; ;
 ; ; Alt+Tab タスク切り替え中
@@ -130,7 +132,6 @@ return
 ;
 ; ;Win+Tabのデスクトップ切り替え
 ; #IfWinActive ahk_class XamlExplorerHostIslandWindow ahk_exe Explorer.EXE
-;
 ;   h::Left
 ;   j::Down
 ;   k::Up
@@ -158,7 +159,6 @@ return
 ;       BlockInput,off
 ;     }
 ;   return
-;
 ; #IfWinActive
 ;
 ; ;

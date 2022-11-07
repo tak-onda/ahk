@@ -72,6 +72,7 @@ sc07b & r::Reload
   F13 & x::Send,^x
   F13 & y::Send,^y
   F13 & z::Send,^z
+  F13 & [::Send,{Escape}
 #IfWinActive
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする

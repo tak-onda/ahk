@@ -75,6 +75,16 @@ sc07b & r::Reload
   F13 & [::Send,{Escape}
 #IfWinActive
 
+;; Ctrl (Cmd) 二度押しで PowerToys Run 起動
+;; Raycast の起動方法にあわせた
+;; https://annin102.hatenadiary.jp/entry/20080415/1208271705
+~LCtrl up::
+if(A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 400)
+{
+  Send, ^+{Space}
+}
+Return
+
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする
 F3::#Tab
 F13 & Up::#Tab

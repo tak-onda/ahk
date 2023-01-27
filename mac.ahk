@@ -40,6 +40,7 @@ sc07b & r::Reload
   F13 & T::Send,^t ;; IdeaVim で戻る
   F13 & J::^j
   F13 & M::Send,{Blind}{Enter}
+  F13 & Enter::Send,^{Enter}
   ;; Ctrl + Enter の意味がわからない
   ;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
 #IfWinNotActive

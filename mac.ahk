@@ -10,11 +10,18 @@ return
 ;; 「変換」「かな」単体でオンになるように
 sc079::
 sc070:: ; Input
-  IME_SET(1)
-  ; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
-  ; とりあえず CorvusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
-  ; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
-  Send, ^j
+  if (IME_GET() == 0)
+  {
+    IME_SET(1)
+  }
+  else
+  {
+    IME_SET(0)
+  }
+; 音声入力で日本語を入力を行うことになったので、skkのモード切り替えのキーストロークが不要になった。
+; とりあえず CorvusSKK を引き続き使うことにするが、Windows 11 との相性なのか AutoHotKey との問題なのか、
+; ときどきちゃんと変換が動かなくなるので、しばらくは様子見する。
+; Send, ^j
 return
 
 ;; 設定のリロード
@@ -41,8 +48,8 @@ sc07b & r::Reload
   F13 & J::^j
   F13 & M::Send,{Blind}{Enter}
   F13 & Enter::Send,^{Enter}
-  ;; Ctrl + Enter の意味がわからない
-  ;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
+;; Ctrl + Enter の意味がわからない
+;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
 #IfWinNotActive
 
 ;; Windows Terminal で入れ替えると tmux が使えない
@@ -80,10 +87,10 @@ sc07b & r::Reload
 ;; Raycast の起動方法にあわせた
 ;; https://annin102.hatenadiary.jp/entry/20080415/1208271705
 ~LCtrl up::
-if(A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 400)
-{
-  Send, ^+{Space}
-}
+  if(A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 400)
+  {
+    Send, !+{Space}
+  }
 Return
 
 ;; F3 でミッションコントロールみたいに Win-Tab 表示にする

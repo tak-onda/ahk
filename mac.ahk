@@ -3,13 +3,14 @@
 #Include IME.ahk
 
 ;; 「無変換」=「英数」単体でオフになるように
-sc07b::
-  IME_SET(0)
-return
+; sc07b::
+;  IME_SET(0)
+; return
 
-;; 「変換」「かな」単体でオンになるように
-sc079::
-sc070:: ; Input
+; sc079::
+; sc070:: ; Input
+; 「無変換」でトグルする
+sc07b::
   if (IME_GET() == 0)
   {
     IME_SET(1)
@@ -75,11 +76,11 @@ sc07b & r::Reload
 
 ;; Windows Terminal で入れ替えると tmux が使えない
 #IfWinActive ahk_exe WindowsTerminal.exe
-  F13::LControl
+  F13::Ctrl
 #IfWinActive
 
 #IfWinActive ahk_exe Code.exe
-  F13::LControl
+  F13::Ctrl
 #IfWinActive
 
 ;; Ctrl (Cmd) 二度押しで PowerToys Run 起動
@@ -114,10 +115,17 @@ sc07b & l::Send, {Right}
 sc07b & 0::Send, {Home}
 sc07b & 4::Send, {End}
 
+sc07b & m::Send, {Enter}
+sc07b & [::Send, {Esc}
+sc07b & ,::Send, {BackSpace}
+sc07b & n::Send, {BackSpace}
+sc07b & i::Send, {Tab}
+
 ; 無変換 + z で Win+z (スナップツール) 起動割り当て
 sc07b & z::#z
 sc07b & a::#a
-sc07b & n::#n
+; Windows 10 なので意味がない
+; sc07b & n::#n
 ; sc07b & x::#x
 sc07b & s::#s
 sc07b & c::^c

@@ -32,56 +32,43 @@ sc07b & r::Reload
 ;; ChangeKey で mac の Cmd の位置に Ctrl, CapsLock を F13 にした上での設定
 ;; http://did2.blog64.fc2.com/blog-entry-349.html
 
-;; CapsLock を使って Emacs 的なキーバインドを実現する
-#IfWinNotActive ahk_exe WindowsTerminal.exe
-  F13 & B::Send,{Blind}{Left}
-  F13 & N::Send,{Blind}{Down}
-  F13 & P::Send,{Blind}{Up}
-  F13 & F::Send,{Blind}{Right}
-  F13 & H::Send,{Blind}{Backspace}
-  F13 & D::Send,{Blind}{Delete}
-  F13 & A::Send,{Blind}{Home}
-  F13 & E::Send,{Blind}{End}
-  F13 & K::Send,+{End}{Shift}+{Delete}
-  F13 & [::Send,{Blind}{Esc}
-  F13 & ]::Send,^] ;; IdeaVim でシンボル移動
-  F13 & T::Send,^t ;; IdeaVim で戻る
-  F13 & J::^j
-  F13 & M::Send,{Blind}{Enter}
-  F13 & I::Send,{Blind}{Tab}
-  F13 & Enter::Send,^{Enter}
-;; Ctrl + Enter の意味がわからない
-;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
-#IfWinNotActive
+;; F13 (CapsLock) を使って Emacs 的なキーバインドを実現する
+;; Windows Terminal や VSCode を例外にしない
+F13 & a::Send,{Blind}{Home}
+F13 & b::Send,{Blind}{Left}
+F13 & c::Send,^c
+F13 & d::Send,{Blind}{Delete}
+F13 & e::Send,{Blind}{End}
+F13 & f::Send,{Blind}{Right}
+F13 & g::Send,^g
+F13 & h::Send,{Blind}{Backspace}
+F13 & i::Send,{Blind}{Tab}
+F13 & j::^j
+F13 & k::Send,+{End}{Shift}+{Delete}
+F13 & l::^l
+F13 & m::Send,{Blind}{Enter}
+F13 & n::Send,{Blind}{Down}
+F13 & o::^o
+F13 & p::Send,{Blind}{Up}
+F13 & q::^q
+F13 & r::^r
+F13 & s::^s
+F13 & t::Send,^t ;; IdeaVim で戻る
+F13 & u::Send,^u
+F13 & v::Send,^v
+F13 & w::Send,^w
+F13 & x::Send,^x
+F13 & y::Send,^y
+F13 & z::Send,^z
+F13 & [::Send,{Blind}{Esc}
+F13 & ]::Send,^] ;; IdeaVim でシンボル移動
+F13 & Enter::Send,^{Enter}
 
-#IfWinNotActive ahk_exe Code.exe
-  F13 & B::Send,{Blind}{Left}
-  F13 & N::Send,{Blind}{Down}
-  F13 & P::Send,{Blind}{Up}
-  F13 & F::Send,{Blind}{Right}
-  F13 & H::Send,{Blind}{Backspace}
-  F13 & D::Send,{Blind}{Delete}
-  F13 & A::Send,{Blind}{Home}
-  F13 & E::Send,{Blind}{End}
-  F13 & K::Send,+{End}{Shift}+{Delete}
-  F13 & [::Send,{Blind}{Esc}
-  F13 & ]::Send,^] ;; IdeaVim でシンボル移動
-  F13 & T::Send,^t ;; IdeaVim で戻る
-  F13 & J::^j
-  F13 & M::Send,{Blind}{Enter}
-  F13 & Enter::Send,^{Enter}
-;; Ctrl + Enter の意味がわからない
-;; F13 & Enter::Send,{Alt Down}{Shift Down}{Enter}{Alt Up}{Shift Up}
-#IfWinNotActive
-
+;; 特定のアプリのときだけ F13 を Ctrl にするのはうまくいかなかった
 ;; Windows Terminal で入れ替えると tmux が使えない
-#IfWinActive ahk_exe WindowsTerminal.exe
-  F13::Ctrl
-#IfWinActive
-
-#IfWinActive ahk_exe Code.exe
-  F13::Ctrl
-#IfWinActive
+;; #IfWinActive ahk_exe WindowsTerminal.exe
+;;   F13::Ctrl
+;; #IfWinActive
 
 ;; Ctrl (Cmd) 二度押しで PowerToys Run 起動
 ;; Raycast の起動方法にあわせた

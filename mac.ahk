@@ -26,7 +26,7 @@ sc07b::
 return
 
 ;; 設定のリロード
-sc07b & r::Reload
+;; sc07b & r::Reload
 
 ;; https://hattomo.github.io/posts/main/21/q1/0223-autohotkey-mac/
 ;; ChangeKey で mac の Cmd の位置に Ctrl, CapsLock を F13 にした上での設定
@@ -102,6 +102,20 @@ sc07b & l::Send, {Right}
 sc07b & 0::Send, {Home}
 sc07b & 4::Send, {End}
 
+sc07b & e::Send, +9
+sc07b & r::Send, +0
+sc07b & d::Send, +[
+sc07b & f::Send, +]
+sc07b & c::Send, [
+sc07b & v::Send, ]
+
+sc07b & t::Send, -
+sc07b & y::Send, +=
+sc07b & g::Send, =
+sc07b & b::Send, +-
+sc07b & o::Send, \
+sc07b & p::Send, +\
+
 sc07b & m::Send, {Enter}
 sc07b & [::Send, {Esc}
 sc07b & ,::Send, {BackSpace}
@@ -109,22 +123,22 @@ sc07b & n::Send, {BackSpace}
 sc07b & i::Send, {Tab}
 
 ; 無変換 + z で Win+z (スナップツール) 起動割り当て
-sc07b & z::#z
-sc07b & a::#a
+; sc07b & z::#z
+; sc07b & a::#a
 ; Windows 10 なので意味がない
 ; sc07b & n::#n
 ; sc07b & x::#x
-sc07b & s::#s
-sc07b & c::^c
-sc07b & x::^x
-sc07b & t::^t
-sc07b & w::^w
-sc07b & v::#v
-sc07b & .::#h ; 音声入力, 右手の押しやす目のキーで . に
-sc07b & Space::#Space
+; sc07b & s::#s
+; sc07b & c::^c
+; sc07b & x::^x
+; sc07b & t::^t
+; sc07b & w::^w
+; sc07b & v::#v
+; sc07b & .::#h ; 音声入力, 右手の押しやす目のキーで . に
+; sc07b & Space::#Space
 
 ; expand という意味で割当しなおし。
-sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
+; sc07b & e::Send, ^+x ;; Teams 用。Ctrl+Shift+X より打ちやすい。
 
 ;^+k::AltTabAndMenu     ;alt+tab    ※3キーは無理？
 
